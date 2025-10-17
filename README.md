@@ -126,7 +126,7 @@ We welcome contributions! Please follow these steps:
 
 If you encounter any issues or have questions:
 
-1. Check the [Issues](https://github.com/AnujYadav-Dev/conner-mental-health-chatbot/issues) page
+1. Check the [Issues](https://github.com/AnujYadav-Dev/conner-ai-companion/issues) page
 2. Create a new issue with detailed information
 3. For security concerns, please email directly
 
