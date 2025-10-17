@@ -13,7 +13,7 @@ import {
   setCurrentSession,
   getCurrentSession,
 } from "../utils/storage.js";
-import { initializeConner, isConnerInitialized } from "../utils/conner.js";
+// Backend client mode: no local model init required
 
 const AppContext = createContext();
 

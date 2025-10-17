@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useApp } from "../context/AppContext.jsx";
 import MessageBubble from "./MessageBubble.jsx";
-import { sendMessageToConner, isConnerInitialized } from "../utils/conner.js";
+import { sendToConner } from "../utils/conner-client.js";
+import { getContextWindow } from "../utils/storage.js";
 
 const ChatWindow = () => {
   const { user, chatHistory, isLoading, sidebarOpen, dispatch, actions } =
@@ -55,11 +56,8 @@ const ChatWindow = () => {
     dispatch({ type: actions.SET_LOADING, payload: true });
 
     try {
-      if (!isConnerInitialized()) {
-        throw new Error("Conner API not initialized");
-      }
-
-      const response = await sendMessageToConner(suggestion);
+      const contextWindow = getContextWindow(10);
+      const response = await sendToConner(suggestion, contextWindow);
 
       if (response.success) {
         const assistantMsg = {

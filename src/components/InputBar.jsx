@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, SlidersHorizontal } from "lucide-react";
 import { useApp } from "../context/AppContext.jsx";
-import { sendMessageToConner, isConnerInitialized } from "../utils/conner.js";
+import { sendToConner } from "../utils/conner-client.js";
+import { getContextWindow } from "../utils/storage.js";
 import { saveSessionSettings } from "../utils/storage.js";
 
 const INPUT_MODES = [
@@ -58,14 +59,8 @@ const InputBar = () => {
     dispatch({ type: actions.ADD_MESSAGE, payload: userMsg });
     dispatch({ type: actions.SET_LOADING, payload: true });
     try {
-      if (!isConnerInitialized()) {
-        throw new Error("Conner API not initialized");
-      }
-      const response = await sendMessageToConner(
-        userMessage,
-        undefined,
-        aiMode
-      );
+      const contextWindow = getContextWindow(10);
+      const response = await sendToConner(userMessage, contextWindow);
       if (response.success) {
         const assistantMsg = {
           role: "assistant",
