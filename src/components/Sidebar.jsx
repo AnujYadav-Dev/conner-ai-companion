@@ -89,13 +89,16 @@ const Sidebar = () => {
     <>
       {/* Mobile overlay */}
       <AnimatePresence>
-        {showMobileMenu && (
+        {(showMobileMenu || (sidebarOpen && window.innerWidth < 1024)) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-            onClick={() => setShowMobileMenu(false)}
+            onClick={() => {
+              setShowMobileMenu(false);
+              dispatch({ type: actions.SET_SIDEBAR_OPEN, payload: false });
+            }}
           />
         )}
       </AnimatePresence>
@@ -110,6 +113,7 @@ const Sidebar = () => {
         className={`
           fixed lg:relative top-0 left-0 h-full z-50 lg:z-auto
           sidebar overflow-hidden
+          ${sidebarOpen ? "lg:block" : "lg:hidden"}
         `}
       >
         <div className="flex flex-col h-full">

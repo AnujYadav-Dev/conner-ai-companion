@@ -42,7 +42,7 @@ const initialState = {
   chatHistory: [],
   currentChat: null,
   isLoading: false,
-  sidebarOpen: true,
+  sidebarOpen: false, // Changed to false for mobile-first approach
   darkMode: false,
   settingsOpen: false,
   helpOpen: false,

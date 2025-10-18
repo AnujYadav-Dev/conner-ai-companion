@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Bot, Copy } from "lucide-react";
 import toast from "../utils/toast.js";
+import { formatMessage, hasFormatting } from "../utils/formatMessage.js";
 
 const MessageBubble = ({ message, isTyping = false }) => {
   const isUser = message.role === "user";
@@ -28,7 +29,7 @@ const MessageBubble = ({ message, isTyping = false }) => {
           <div className="message-bubble message-assistant">
             <div className="typing-indicator">
               <span className="text-sm text-gray-600 dark:text-gray-400 mr-2">
-                Conner is typing
+                Conner is Thinking
               </span>
               <div className="typing-dot"></div>
               <div className="typing-dot"></div>
@@ -85,9 +86,20 @@ const MessageBubble = ({ message, isTyping = false }) => {
         `}
         >
           <div className="prose prose-sm max-w-none dark:prose-invert">
-            <p className="whitespace-pre-wrap m-0 leading-relaxed">
-              {message.content}
-            </p>
+            {isUser ? (
+              <p className="whitespace-pre-wrap m-0 leading-relaxed">
+                {message.content}
+              </p>
+            ) : (
+              <div
+                className="whitespace-pre-wrap m-0 leading-relaxed"
+                dangerouslySetInnerHTML={{
+                  __html: hasFormatting(message.content)
+                    ? formatMessage(message.content)
+                    : message.content,
+                }}
+              />
+            )}
           </div>
 
           <div className="flex items-center justify-between mt-2">

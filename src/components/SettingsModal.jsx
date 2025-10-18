@@ -135,6 +135,8 @@ const SettingsModal = () => {
     dispatch({ type: actions.SET_USER, payload: null });
     toast.success("Account deleted.");
     setConfirmDeleteOpen(false);
+    // Close the settings modal after account deletion
+    dispatch({ type: actions.SET_SETTINGS_OPEN, payload: false });
   };
 
   if (!settingsOpen) return null;

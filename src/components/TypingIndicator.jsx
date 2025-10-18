@@ -17,7 +17,7 @@ const TypingIndicator = () => {
         <div className="bg-white dark:bg-gray-700 px-4 py-2 rounded-2xl shadow-sm">
           <div className="flex items-center space-x-1">
             <span className="text-sm text-gray-600 dark:text-gray-400">
-              Conner is thinking
+              Conner is Thinking
             </span>
             <div className="flex space-x-1">
               <motion.div

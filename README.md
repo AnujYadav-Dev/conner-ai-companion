@@ -25,8 +25,8 @@ A modern, empathetic AI companion designed to support mental well-being through 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/AnujYadav-Dev/conner-mental-health-chatbot.git
-cd conner-mental-health-chatbot
+git clone https://github.com/AnujYadav-Dev/conner-ai-companion.git
+cd conner-ai-companion
 ```
 
 2. Install dependencies:
