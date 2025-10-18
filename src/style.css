@@ -42,6 +42,7 @@
     @apply max-w-3xl mx-auto px-6 py-4 rounded-xl;
     @apply transition-all duration-300 ease-out;
     @apply shadow-sm;
+    @apply break-words;
   }
 
   .message-user {

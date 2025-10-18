@@ -22,7 +22,7 @@ const MessageBubble = ({ message, isTyping = false }) => {
         animate={{ opacity: 1, y: 0 }}
         className="flex justify-start mb-4"
       >
-        <div className="flex items-start space-x-4 max-w-3xl">
+        <div className="flex flex-col space-y-3 max-w-3xl">
           <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
             <img src="/conner.svg" alt="Conner" className="w-8 h-8" />
           </div>
@@ -49,8 +49,8 @@ const MessageBubble = ({ message, isTyping = false }) => {
       className={`flex mb-4 ${isUser ? "justify-end" : "justify-start"}`}
     >
       <div
-        className={`flex items-start space-x-4 max-w-3xl ${
-          isUser ? "flex-row-reverse space-x-reverse" : ""
+        className={`flex flex-col space-y-3 max-w-3xl ${
+          isUser ? "items-end flex-row-reverse space-x-reverse" : ""
         }`}
       >
         {/* Avatar */}
