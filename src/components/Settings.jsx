@@ -13,13 +13,10 @@ import {
 import {
   getSessionSettings,
   saveSessionSettings,
-  getSystemPrompt,
-  saveSystemPrompt,
   exportChatHistory,
   clearChatHistory,
 } from "../utils/storage.js";
 import toast from "../utils/toast.js";
-import { updateSystemPromptForPersonality } from "../utils/conner.js";
 
 const Settings = ({ isOpen, onClose }) => {
   const [settings, setSettings] = useState({
@@ -29,16 +26,13 @@ const Settings = ({ isOpen, onClose }) => {
     aiPersonality: "supportive",
     typingSpeed: 50,
   });
-  const [systemPrompt, setSystemPrompt] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [showExportSuccess, setShowExportSuccess] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       const currentSettings = getSessionSettings();
-      const currentPrompt = getSystemPrompt();
       setSettings(currentSettings);
-      setSystemPrompt(currentPrompt);
     }
   }, [isOpen]);
 
@@ -55,13 +49,6 @@ const Settings = ({ isOpen, onClose }) => {
     try {
       // Save session settings
       saveSessionSettings(settings);
-
-      // Update system prompt based on personality
-      const updatedPrompt = updateSystemPromptForPersonality(
-        settings.aiPersonality
-      );
-      saveSystemPrompt(updatedPrompt);
-      setSystemPrompt(updatedPrompt);
 
       // Apply dark mode immediately
       if (settings.darkMode) {
@@ -309,23 +296,6 @@ const Settings = ({ isOpen, onClose }) => {
                 <span>Clear All Data</span>
               </button>
             </div>
-          </div>
-
-          {/* System Prompt */}
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              System Prompt
-            </h3>
-            <textarea
-              value={systemPrompt}
-              onChange={(e) => setSystemPrompt(e.target.value)}
-              rows="4"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-              placeholder="Enter the system prompt for Conner..."
-            />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              This defines how Conner behaves and responds to users
-            </p>
           </div>
         </div>
 

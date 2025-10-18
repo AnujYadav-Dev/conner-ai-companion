@@ -60,7 +60,7 @@ const InputBar = () => {
     dispatch({ type: actions.SET_LOADING, payload: true });
     try {
       const contextWindow = getContextWindow(10);
-      const response = await sendToConner(userMessage, contextWindow);
+      const response = await sendToConner(userMessage, contextWindow, aiMode);
       if (response.success) {
         const assistantMsg = {
           role: "assistant",

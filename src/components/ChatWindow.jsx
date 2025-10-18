@@ -6,8 +6,15 @@ import { sendToConner } from "../utils/conner-client.js";
 import { getContextWindow } from "../utils/storage.js";
 
 const ChatWindow = () => {
-  const { user, chatHistory, isLoading, sidebarOpen, dispatch, actions } =
-    useApp();
+  const {
+    user,
+    chatHistory,
+    isLoading,
+    sidebarOpen,
+    dispatch,
+    actions,
+    aiMode,
+  } = useApp();
 
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
@@ -57,7 +64,7 @@ const ChatWindow = () => {
 
     try {
       const contextWindow = getContextWindow(10);
-      const response = await sendToConner(suggestion, contextWindow);
+      const response = await sendToConner(suggestion, contextWindow, aiMode);
 
       if (response.success) {
         const assistantMsg = {

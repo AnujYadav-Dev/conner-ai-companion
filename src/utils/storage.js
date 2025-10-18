@@ -7,12 +7,8 @@ export const STORAGE_KEYS = {
     CURRENT_SESSION: 'conner_currentSession',
     CURRENT_USER: 'conner_currentUser',
     SESSION_SETTINGS: 'conner_sessionSettings',
-    LAST_LOGIN: 'conner_lastLogin',
-    SYSTEM_PROMPT: 'conner_systemPrompt'
+    LAST_LOGIN: 'conner_lastLogin'
 };
-
-// Default system prompt for Conner
-export const DEFAULT_SYSTEM_PROMPT = "You are Conner, an empathetic and reflective AI companion for mental well-being. You help users explore their emotions, build self-awareness, and develop healthier thought patterns. You are supportive, non-judgmental, and never give medical advice or diagnoses. You focus on listening, asking reflective questions, and guiding users to think positively and realistically.";
 
 // Default session settings
 export const DEFAULT_SETTINGS = {
@@ -134,25 +130,6 @@ export const getSessionSettings = () => {
     }
 };
 
-// System prompt management
-export const saveSystemPrompt = (prompt) => {
-    try {
-        localStorage.setItem(STORAGE_KEYS.SYSTEM_PROMPT, prompt);
-        return true;
-    } catch (error) {
-        console.error('Error saving system prompt:', error);
-        return false;
-    }
-};
-
-export const getSystemPrompt = () => {
-    try {
-        return localStorage.getItem(STORAGE_KEYS.SYSTEM_PROMPT) || DEFAULT_SYSTEM_PROMPT;
-    } catch (error) {
-        console.error('Error getting system prompt:', error);
-        return DEFAULT_SYSTEM_PROMPT;
-    }
-};
 
 // Last login tracking
 export const updateLastLogin = () => {
@@ -210,19 +187,14 @@ export const exportChatHistory = (format = 'json') => {
 export const getContextWindow = (windowSize = 10) => {
     try {
         const history = getChatHistory();
-        const systemPrompt = getSystemPrompt();
 
-        // Get the last N messages
+        // Get the last N messages (no system prompt needed - backend handles it)
         const recentMessages = history.slice(-windowSize);
 
-        // Add system prompt at the beginning
-        return [
-            { role: 'system', content: systemPrompt },
-            ...recentMessages
-        ];
+        return recentMessages;
     } catch (error) {
         console.error('Error getting context window:', error);
-        return [{ role: 'system', content: getSystemPrompt() }];
+        return [];
     }
 };
 
