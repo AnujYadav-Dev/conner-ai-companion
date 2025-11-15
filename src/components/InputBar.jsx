@@ -192,7 +192,7 @@ const InputBar = () => {
         {/* Helper text */}
         <div className="mt-3 text-center">
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            Coneer can make mistakes, so double-check it
+            Conner can make mistakes, so double-check it
           </p>
         </div>
       </form>
